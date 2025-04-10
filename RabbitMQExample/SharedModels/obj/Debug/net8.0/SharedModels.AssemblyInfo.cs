@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SharedModels")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b098a0d2d6c000562654a406fd2e7c4c802b821c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SharedModels")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SharedModels")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

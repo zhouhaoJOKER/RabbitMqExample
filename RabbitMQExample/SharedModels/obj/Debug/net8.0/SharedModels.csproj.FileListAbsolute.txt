@@ -9,3 +9,4 @@ D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels
 D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\refint\SharedModels.dll
 D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.pdb
 D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\ref\SharedModels.dll
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.sourcelink.json
