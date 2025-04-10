@@ -1,0 +1,8 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/RabbitMQExample/.vs/RabbitMQExample/CopilotIndices/17.13.439.2385/CodeChunks.db-shm
+/RabbitMQExample/.vs/RabbitMQExample/CopilotIndices/17.13.439.2385/CodeChunks.db-wal
+/RabbitMQExample/.vs/RabbitMQExample/CopilotIndices/17.13.439.2385/SemanticSymbols.db-shm
+/RabbitMQExample/.vs/RabbitMQExample/CopilotIndices/17.13.439.2385/SemanticSymbols.db-wal
