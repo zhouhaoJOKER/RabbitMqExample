@@ -14,11 +14,10 @@ var factory = new ConnectionFactory()
     VirtualHost = "fzwebapi"
 };
 
+// fanout 交换机模式下：队列名称需要选择随机名称，并且需要独占消息队列
 using var connection = await factory.CreateConnectionAsync();
 using var channel = await connection.CreateChannelAsync();
 
-// 声明队列(确保队列存在)
-//const string queueName = "messageQueue_no2";
 const string exchangeName = "broker1";
 
 await channel.ExchangeDeclareAsync(exchange: exchangeName, ExchangeType.Fanout, true, false);
@@ -54,11 +53,10 @@ consumer.ReceivedAsync += async (model, ea) =>
     }
 };
 
-
 // 开始消费消息
 await channel.BasicConsumeAsync(
     queue: queue.QueueName,
-    autoAck: false,
+    autoAck: false,//关闭自动确认，手动确认，避免消息丢失，如果消息unack之后，链接关闭的时候，消息会重新入队
     consumer: consumer);
 
 Console.WriteLine("RabbitMQ 消费者已启动，等待消息... (按Enter退出)");

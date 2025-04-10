@@ -14,3 +14,5 @@ bin
 /RabbitMQExample/RabbitMQProducer/obj
 obj
 bin
+/RabbitMQExample/SharedModels/bin
+/RabbitMQExample/SharedModels/obj

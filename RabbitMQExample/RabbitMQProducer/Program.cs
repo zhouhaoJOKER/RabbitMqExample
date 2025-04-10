@@ -10,7 +10,6 @@ var factory = new ConnectionFactory()
     UserName = "fzwebapi",    // 默认用户名
     Password = "123456",     // 默认密码
     VirtualHost = "fzwebapi",
-    
 };
 
 using var connection = await factory.CreateConnectionAsync();
