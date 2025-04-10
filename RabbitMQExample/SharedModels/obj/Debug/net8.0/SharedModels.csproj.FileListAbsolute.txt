@@ -1,0 +1,11 @@
+D:\project\my-project\RabbitMQExample\SharedModels\bin\Debug\net8.0\SharedModels.deps.json
+D:\project\my-project\RabbitMQExample\SharedModels\bin\Debug\net8.0\SharedModels.dll
+D:\project\my-project\RabbitMQExample\SharedModels\bin\Debug\net8.0\SharedModels.pdb
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.GeneratedMSBuildEditorConfig.editorconfig
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.AssemblyInfoInputs.cache
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.AssemblyInfo.cs
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.csproj.CoreCompileInputs.cache
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.dll
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\refint\SharedModels.dll
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\SharedModels.pdb
+D:\project\my-project\RabbitMQExample\SharedModels\obj\Debug\net8.0\ref\SharedModels.dll
