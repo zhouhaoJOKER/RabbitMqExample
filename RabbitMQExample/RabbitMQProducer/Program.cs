@@ -2,8 +2,7 @@
 using SharedModels;
 using System.Text;
 using System.Text.Json;
-
-// 创建连接工厂
+ 
 var factory = new ConnectionFactory()
 {
     HostName = "192.168.0.226", // RabbitMQ服务器地址
@@ -16,20 +15,10 @@ var factory = new ConnectionFactory()
 
 using var connection = await factory.CreateConnectionAsync();
 using var channel = await connection.CreateChannelAsync();
-const string exchangeName = "broker1";
 
-// 声明队列
-//const string queueName = "messageQueue";
-//const string routingKey = "router";
-
-//const string queueName = "messageQueue_no2";
-const string routingKey = "";
+const string exchangeName = "broker1"; 
 
 await channel.ExchangeDeclareAsync(exchange: exchangeName, ExchangeType.Fanout, true, false);
-
-//await channel.QueueDeclareAsync(queue: queueName, durable: true, exclusive: true, autoDelete: false, arguments: null);
-
-//await channel.QueueBindAsync(queueName, exchangeName, routingKey);
 
 Console.WriteLine("RabbitMQ 生产者已启动，输入消息内容并按Enter发送 (输入exit退出):");
 
@@ -58,7 +47,7 @@ while (true)
     props.ContentType = "text/plain";
     props.DeliveryMode = DeliveryModes.Persistent;
 
-    await channel.BasicPublishAsync(exchangeName, routingKey: routingKey, mandatory: true, basicProperties: props, body: body);
+    await channel.BasicPublishAsync(exchangeName, routingKey: "", mandatory: true, basicProperties: props, body: body);
 
     Console.WriteLine($" [x] 已发送: {message.Content}");
 }

@@ -19,3 +19,4 @@ D:\project\my-project\RabbitMQExample\RabbitMQProducer\obj\Debug\net8.0\refint\R
 D:\project\my-project\RabbitMQExample\RabbitMQProducer\obj\Debug\net8.0\RabbitMQProducer.pdb
 D:\project\my-project\RabbitMQExample\RabbitMQProducer\obj\Debug\net8.0\RabbitMQProducer.genruntimeconfig.cache
 D:\project\my-project\RabbitMQExample\RabbitMQProducer\obj\Debug\net8.0\ref\RabbitMQProducer.dll
+D:\project\my-project\RabbitMQExample\RabbitMQProducer\obj\Debug\net8.0\RabbitMQProducer.sourcelink.json

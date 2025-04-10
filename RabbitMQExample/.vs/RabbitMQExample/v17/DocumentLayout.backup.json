@@ -19,10 +19,6 @@
       "RelativeMoniker": "D:0:0:{FE2E8BA3-2758-4164-B7BD-93C925DB4B0F}|SharedModels\\SharedModels.csproj|solutionrelative:sharedmodels\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C1F5678-D0DF-48A1-9D62-8CA036296F3E}|RabbitMQProducer\\RabbitMQProducer.csproj|d:\\project\\my-project\\rabbitmqexample\\rabbitmqproducer\\rabbitmqproducer.csproj.backup.tmp||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{5C1F5678-D0DF-48A1-9D62-8CA036296F3E}|RabbitMQProducer\\RabbitMQProducer.csproj|solutionrelative:rabbitmqproducer\\rabbitmqproducer.csproj.backup.tmp||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5E2DA2FE-C67C-4DC3-952C-2F8D03D4D286}|RabbitMQConsumer\\RabbitMQConsumer.csproj|d:\\project\\my-project\\rabbitmqexample\\rabbitmqconsumer\\rabbitmqconsumer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{5E2DA2FE-C67C-4DC3-952C-2F8D03D4D286}|RabbitMQConsumer\\RabbitMQConsumer.csproj|solutionrelative:rabbitmqconsumer\\rabbitmqconsumer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
@@ -44,7 +40,7 @@
               "RelativeDocumentMoniker": "RabbitMQProducer\\Program.cs",
               "ToolTip": "D:\\project\\my-project\\RabbitMQExample\\RabbitMQProducer\\Program.cs",
               "RelativeToolTip": "RabbitMQProducer\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-09T06:31:18.963Z",
               "IsPinned": true,
@@ -53,41 +49,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "RabbitMQProducer.csproj.Backup.tmp",
-              "DocumentMoniker": "D:\\project\\my-project\\RabbitMQExample\\RabbitMQProducer\\RabbitMQProducer.csproj.Backup.tmp",
-              "RelativeDocumentMoniker": "RabbitMQProducer\\RabbitMQProducer.csproj.Backup.tmp",
-              "ToolTip": "D:\\project\\my-project\\RabbitMQExample\\RabbitMQProducer\\RabbitMQProducer.csproj.Backup.tmp",
-              "RelativeToolTip": "RabbitMQProducer\\RabbitMQProducer.csproj.Backup.tmp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-04-09T07:36:20.238Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RabbitMQConsumer",
+              "Title": "RabbitMQConsumer.csproj",
               "DocumentMoniker": "D:\\project\\my-project\\RabbitMQExample\\RabbitMQConsumer\\RabbitMQConsumer.csproj",
               "RelativeDocumentMoniker": "RabbitMQConsumer\\RabbitMQConsumer.csproj",
               "ToolTip": "D:\\project\\my-project\\RabbitMQExample\\RabbitMQConsumer\\RabbitMQConsumer.csproj",
               "RelativeToolTip": "RabbitMQConsumer\\RabbitMQConsumer.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-09T06:45:09.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T06:45:09.209Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "RabbitMQProducer",
+              "Title": "RabbitMQProducer.csproj",
               "DocumentMoniker": "D:\\project\\my-project\\RabbitMQExample\\RabbitMQProducer\\RabbitMQProducer.csproj",
               "RelativeDocumentMoniker": "RabbitMQProducer\\RabbitMQProducer.csproj",
               "ToolTip": "D:\\project\\my-project\\RabbitMQExample\\RabbitMQProducer\\RabbitMQProducer.csproj",
               "RelativeToolTip": "RabbitMQProducer\\RabbitMQProducer.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-09T06:33:07.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T06:33:07.516Z"
             },
             {
               "$type": "Document",
@@ -99,8 +80,7 @@
               "RelativeToolTip": "RabbitMQConsumer\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T06:31:39.446Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T06:31:39.446Z"
             },
             {
               "$type": "Document",
@@ -112,8 +92,7 @@
               "RelativeToolTip": "SharedModels\\Message.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T06:30:27.93Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T06:30:27.93Z"
             }
           ]
         }
