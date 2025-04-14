@@ -16,3 +16,4 @@ obj
 bin
 /RabbitMQExample/SharedModels/bin
 /RabbitMQExample/SharedModels/obj
+/RabbitMQExample/.vs
