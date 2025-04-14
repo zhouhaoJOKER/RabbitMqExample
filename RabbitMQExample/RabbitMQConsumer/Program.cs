@@ -18,16 +18,13 @@ var factory = new ConnectionFactory()
 using var connection = await factory.CreateConnectionAsync();
 using var channel = await connection.CreateChannelAsync();
 
-const string exchangeName = "broker.fanout";
+const string exchangeName = "broker.direct";
+const string queueName = "order.create"; // 队列名称
+const string routeKey = queueName;
 
-await channel.ExchangeDeclareAsync(exchange: exchangeName, ExchangeType.Fanout, true, false);
+var queue = await channel.QueueDeclareAsync(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-//Direct
-//await channel.QueueDeclareAsync(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
-//fanout模式下，队列名称可以不一致
-var queue = await channel.QueueDeclareAsync(queue: "", durable: true, exclusive: true, autoDelete: false, arguments: null);
-
-await channel.QueueBindAsync(queue.QueueName, exchangeName, "");
+await channel.QueueBindAsync(queue.QueueName, exchangeName, routeKey);
 
 // 创建消费者
 var consumer = new AsyncEventingBasicConsumer(channel);
