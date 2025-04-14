@@ -18,7 +18,7 @@ var factory = new ConnectionFactory()
 using var connection = await factory.CreateConnectionAsync();
 using var channel = await connection.CreateChannelAsync();
 
-const string exchangeName = "broker1";
+const string exchangeName = "broker.fanout";
 
 await channel.ExchangeDeclareAsync(exchange: exchangeName, ExchangeType.Fanout, true, false);
 
