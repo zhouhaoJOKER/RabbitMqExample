@@ -18,13 +18,12 @@ var factory = new ConnectionFactory()
 using var connection = await factory.CreateConnectionAsync();
 using var channel = await connection.CreateChannelAsync();
 
-const string exchangeName = "broker.direct";
-const string queueName = "order.create"; // 队列名称
+const string exchangeName = "broker.topic";
+const string queueName = "order.create.new"; // 队列名称
 const string routeKey = queueName;
-
+await channel.ExchangeDeclareAsync(exchange: exchangeName, ExchangeType.Topic, true, false);
 var queue = await channel.QueueDeclareAsync(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-await channel.QueueBindAsync(queue.QueueName, exchangeName, routeKey);
+await channel.QueueBindAsync(queueName, exchangeName, routeKey);
 
 // 创建消费者
 var consumer = new AsyncEventingBasicConsumer(channel);
@@ -37,7 +36,7 @@ consumer.ReceivedAsync += async (model, ea) =>
         var json = Encoding.UTF8.GetString(body);
         var message = JsonSerializer.Deserialize<Message>(json);
 
-        Console.WriteLine($" [x] 收到消息: {message?.Content} (发送于: {message?.Timestamp:yyyy-MM-dd HH:mm:ss})");
+        Console.WriteLine($"消费者 [x] RoutingKey>{ea.RoutingKey} 收到消息: {message?.Content} (发送于: {message?.Timestamp:yyyy-MM-dd HH:mm:ss})");
 
         // 手动确认消息
         await channel.BasicAckAsync(deliveryTag: ea.DeliveryTag, multiple: false);
@@ -52,7 +51,7 @@ consumer.ReceivedAsync += async (model, ea) =>
 
 // 开始消费消息
 await channel.BasicConsumeAsync(
-    queue: queue.QueueName,
+    queue: queueName,
     autoAck: false,//关闭自动确认，手动确认，避免消息丢失，如果消息unack之后，链接关闭的时候，消息会重新入队
     consumer: consumer);
 
