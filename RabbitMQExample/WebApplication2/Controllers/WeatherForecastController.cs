@@ -79,8 +79,21 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
     }
 
+    [HttpGet]
+    public string Health()
+    {
+        return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    }
 
-    [HttpGet("test")]
+    [HttpGet]
+    public string GetTest()
+    {
+        string startTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        Thread.Sleep(5000);
+        return startTime + "---" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    }
+
+    [HttpGet]
     public IActionResult TestCacheExpiration()
     {
         var key = "testKey";
@@ -120,7 +133,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet]
     public IActionResult GetToken([FromQuery, Required] string loginToken)
     {
-        var s =  _userSessionContext.GetUserSimulator(loginToken);
+        var s = _userSessionContext.GetUserSimulator(loginToken);
         return Ok(s.GetToken());
     }
 }

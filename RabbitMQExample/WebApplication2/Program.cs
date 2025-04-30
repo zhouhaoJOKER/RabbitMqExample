@@ -1,4 +1,8 @@
 
+using System.Text;
+using WebApplication2.FileStorage;
+using WebApplication2.FileStorageService;
+
 namespace WebApplication2
 {
     public class Program
@@ -16,6 +20,10 @@ namespace WebApplication2
             builder.Services.AddMemoryCache();
             builder.Services.AddTransient<Simulator>();
             builder.Services.AddSingleton<UserSessionContext>();
+
+            builder.Services.AddSingleton<IFileStorageService, LocalFileService>();
+            builder.Services.AddSingleton<IFileStorageService, MinioService>();
+            builder.Services.AddSingleton<IFileStorageService, FTPService>();
 
             var app = builder.Build();
 
