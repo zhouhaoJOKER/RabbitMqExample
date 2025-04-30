@@ -2,7 +2,7 @@
 using SharedModels;
 using System.Text;
 using System.Text.Json;
- 
+
 var factory = new ConnectionFactory()
 {
     HostName = "192.168.0.226", // RabbitMQ服务器地址
@@ -12,13 +12,12 @@ var factory = new ConnectionFactory()
     VirtualHost = "fzwebapi",
 };
 
-using var connection = await factory.CreateConnectionAsync();
+using var connection = await factory.CreateConnectionAsync("Producer Node1");
 using var channel = await connection.CreateChannelAsync();
-
-const string exchangeName = "broker.fanout"; 
-
-await channel.ExchangeDeclareAsync(exchange: exchangeName, ExchangeType.Fanout, true, false);
-
+//1、定义ExchangeType类型是 Fanout模式生产者
+//2、注意这种方式的情况下，如果消费者还没有上线的话，消息会被丢失
+const string exchangeName = "broker.fanout";
+await channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Fanout, durable: true, autoDelete: false);
 Console.WriteLine("RabbitMQ 生产者已启动，输入消息内容并按Enter发送 (输入exit退出):");
 
 while (true)
@@ -40,11 +39,14 @@ while (true)
 
     // 序列化消息
     var json = JsonSerializer.Serialize(message);
-    var body = Encoding.UTF8.GetBytes(json); 
+    var body = Encoding.UTF8.GetBytes(json);
 
-    var props = new BasicProperties();
-    props.ContentType = "text/plain";
-    props.DeliveryMode = DeliveryModes.Persistent;
+    //保证消息的持久化
+    var props = new BasicProperties()
+    {
+        ContentType = "text/plain",
+        DeliveryMode = DeliveryModes.Persistent
+    };
 
     await channel.BasicPublishAsync(exchangeName, routingKey: "", mandatory: true, basicProperties: props, body: body);
 

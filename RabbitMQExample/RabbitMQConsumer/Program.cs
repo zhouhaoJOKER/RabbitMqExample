@@ -15,14 +15,14 @@ var factory = new ConnectionFactory()
 };
 
 // fanout 交换机模式下：队列名称需要选择随机名称，并且需要独占消息队列
-using var connection = await factory.CreateConnectionAsync();
+using var connection = await factory.CreateConnectionAsync("Consumer Node1");
 using var channel = await connection.CreateChannelAsync();
 
-const string exchangeName = "broker.fanout"; 
-
+const string exchangeName = "broker.fanout";
+await channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Fanout, durable: true, autoDelete: false);
 var queue = await channel.QueueDeclareAsync(queue: "", durable: true, exclusive: true, autoDelete: false, arguments: null);
-
-await channel.QueueBindAsync(queue.QueueName, exchangeName, "");
+Console.WriteLine($"Consumer Node1: {queue.QueueName}");
+await channel.QueueBindAsync(queue: queue.QueueName, exchange: exchangeName, routingKey: "");
 
 // 创建消费者
 var consumer = new AsyncEventingBasicConsumer(channel);
@@ -37,6 +37,7 @@ consumer.ReceivedAsync += async (model, ea) =>
 
         Console.WriteLine($" [x] 收到消息: {message?.Content} (发送于: {message?.Timestamp:yyyy-MM-dd HH:mm:ss})");
 
+        throw new System.Net.Http.HttpRequestException();
         // 手动确认消息
         await channel.BasicAckAsync(deliveryTag: ea.DeliveryTag, multiple: false);
     }
@@ -44,7 +45,7 @@ consumer.ReceivedAsync += async (model, ea) =>
     {
         Console.WriteLine($" [!] 处理消息时发生错误: {ex.Message}");
         // 如果需要，可以选择不确认消息或将其重新入队
-        await channel.BasicNackAsync(deliveryTag: ea.DeliveryTag, multiple: false, requeue: true);
+        //await channel.BasicNackAsync(deliveryTag: ea.DeliveryTag, multiple: false, requeue: true);
     }
 };
 
