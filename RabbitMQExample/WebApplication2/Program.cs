@@ -2,6 +2,7 @@
 using System.Text;
 using WebApplication2.FileStorage;
 using WebApplication2.FileStorageService;
+using ZteCommom.Book;
 
 namespace WebApplication2
 {
@@ -19,6 +20,7 @@ namespace WebApplication2
             builder.Services.AddSwaggerGen();
             builder.Services.AddMemoryCache();
             builder.Services.AddTransient<Simulator>();
+            builder.Services.AddTransient<BookManager>();
             builder.Services.AddSingleton<UserSessionContext>();
 
             builder.Services.AddSingleton<IFileStorageService, LocalFileService>();
@@ -36,7 +38,7 @@ namespace WebApplication2
 
             app.UseAuthorization();
 
-
+            app.UseWebSockets();
             app.MapControllers();
 
             app.Run();

@@ -12,10 +12,12 @@ namespace WebApplication2
         /// 
         /// </summary> 
         private readonly ConcurrentDictionary<string, Simulator> _userSimulatorContext;
+        private readonly ConcurrentDictionary<string, WebSocket> _userWebSocketContext;
 
         public UserSessionContext()
         {
             _userSimulatorContext = new ConcurrentDictionary<string, Simulator>();
+            _userWebSocketContext = new ConcurrentDictionary<string, WebSocket>();
         }
 
         /// <summary>
@@ -57,6 +59,45 @@ namespace WebApplication2
             }
 
             return simulator;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="webSocket"></param>
+        /// <returns></returns>
+        public void AddWebSocket(string loginToken, WebSocket webSocket)
+        {
+            //lock (locker)
+            //{
+            //    if (!_userWebSocketContext.ContainsKey(loginToken))
+            //    {
+            //        _userWebSocketContext.TryAdd(loginToken, webSocket);
+            //    }
+            //}
+            //本来就是原子操作无需再添加locker，避免了线程阻塞
+
+            if (_userWebSocketContext.ContainsKey(loginToken))
+            {
+                _userWebSocketContext.Remove(loginToken, out _);
+            }
+
+            _userWebSocketContext.TryAdd(loginToken, webSocket);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public WebSocket? GetUserSocket(string userId)
+        {
+            if (!_userWebSocketContext.TryGetValue(userId, out WebSocket? webSocket))
+            {
+
+            }
+            return webSocket;
         }
     }
 }

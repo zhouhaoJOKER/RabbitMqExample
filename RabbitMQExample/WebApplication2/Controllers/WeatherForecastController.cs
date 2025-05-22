@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using System.Net.WebSockets;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Utility;
+using WebApplication2.Dto;
 
 namespace WebApplication2.Controllers;
 
@@ -130,10 +133,40 @@ public class WeatherForecastController : ControllerBase
         return Ok(loginToken);
     }
 
+    /// <summary>
+    /// 开启设备
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="deviceType"></param>
+    /// <param name="zteDevice"></param>
+    /// <returns></returns>
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+    public async Task StartDev([FromQuery] int num, string loginToken)
+    {
+        var s = _userSessionContext.GetUserSimulator(loginToken);
+        await s.Yuyue(num, loginToken);
+    }
+
     [HttpGet]
     public IActionResult GetToken([FromQuery, Required] string loginToken)
     {
         var s = _userSessionContext.GetUserSimulator(loginToken);
         return Ok(s.GetToken());
     }
+
+    [HttpPost]
+    public async Task SendMessageToWeb([FromQuery]string token) 
+    {
+        var ws = _userSessionContext.GetUserSocket(token);
+        if (ws != null) 
+        {
+            _logger.LogInformation($"通知客户端web用户绑定成功loginToken");
+            WSMessage notifyMsg = new WSMessage();
+            notifyMsg.submsg = "LoginZte";
+            notifyMsg.msg = "Notify";
+            await ws.SendAsync(notifyMsg.ToSocketMessage(), WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+    }
+
 }
