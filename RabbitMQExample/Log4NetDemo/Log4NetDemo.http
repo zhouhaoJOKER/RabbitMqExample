@@ -1,0 +1,6 @@
+@Log4NetDemo_HostAddress = http://localhost:5090
+
+GET {{Log4NetDemo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

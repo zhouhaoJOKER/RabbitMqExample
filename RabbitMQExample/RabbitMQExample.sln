@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.Tests", "Test\MyWe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{C48BFC39-808B-44BF-B217-697C1A11FEFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log4NetDemo", "Log4NetDemo\Log4NetDemo.csproj", "{AD98AAED-8007-4DEF-B12E-68A8B1833576}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{C48BFC39-808B-44BF-B217-697C1A11FEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C48BFC39-808B-44BF-B217-697C1A11FEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C48BFC39-808B-44BF-B217-697C1A11FEFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD98AAED-8007-4DEF-B12E-68A8B1833576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD98AAED-8007-4DEF-B12E-68A8B1833576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD98AAED-8007-4DEF-B12E-68A8B1833576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD98AAED-8007-4DEF-B12E-68A8B1833576}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
