@@ -26,6 +26,7 @@ namespace WebApplication2
             builder.Services.AddSingleton<IFileStorageService, LocalFileService>();
             builder.Services.AddSingleton<IFileStorageService, MinioService>();
             builder.Services.AddSingleton<IFileStorageService, FTPService>();
+            builder.Services.AddTransient<ZteUserSimulatorService>();
 
             var app = builder.Build();
 

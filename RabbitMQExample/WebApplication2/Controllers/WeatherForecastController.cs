@@ -1,11 +1,17 @@
-using System.ComponentModel.DataAnnotations;
-using System.Net.WebSockets;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json.Linq;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Net.Http;
+using System.Net.WebSockets;
+using System.Text;
 using Utility;
 using WebApplication2.Dto;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApplication2.Controllers;
 
@@ -22,13 +28,15 @@ public class WeatherForecastController : ControllerBase
     private readonly IMemoryCache _memoryCache;
     private readonly Simulator _simulator;
     private readonly UserSessionContext _userSessionContext;
+    private readonly ZteUserSimulatorService _zteUserSimulatorService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IMemoryCache memoryCache, Simulator simulator, UserSessionContext userSessionContext)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IMemoryCache memoryCache, Simulator simulator, UserSessionContext userSessionContext, ZteUserSimulatorService zteUserSimulatorService)
     {
         _logger = logger;
         this._memoryCache = memoryCache;
         _simulator = simulator;
         _userSessionContext = userSessionContext;
+        _zteUserSimulatorService = zteUserSimulatorService;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -126,10 +134,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet]
     public IActionResult Login([FromQuery, Required] string loginToken)
     {
-        _simulator.InitToken(loginToken);
-
-        _userSessionContext.AddUserSimulator(loginToken, _simulator);
-
+        _zteUserSimulatorService.LoginZte(loginToken);
         return Ok(loginToken);
     }
 
@@ -156,10 +161,10 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpPost]
-    public async Task SendMessageToWeb([FromQuery]string token) 
+    public async Task SendMessageToWeb([FromQuery] string token)
     {
         var ws = _userSessionContext.GetUserSocket(token);
-        if (ws != null) 
+        if (ws != null)
         {
             _logger.LogInformation($"通知客户端web用户绑定成功loginToken");
             WSMessage notifyMsg = new WSMessage();
@@ -167,6 +172,30 @@ public class WeatherForecastController : ControllerBase
             notifyMsg.msg = "Notify";
             await ws.SendAsync(notifyMsg.ToSocketMessage(), WebSocketMessageType.Text, true, CancellationToken.None);
         }
+    }
+
+
+    [HttpGet]
+    public async Task DownLoad([FromQuery, Required] string loginToken)
+    {
+        HttpClient _client = new HttpClient();
+
+        _client.BaseAddress = new Uri("https://csl.zte.com.cn");
+
+        _client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6eGNzbCIsInN1YiI6IkNTTDEwMDAwMDE2IiwiYXVkIjpbImZlbmdtYWkiXSwiZXhwIjoxNzQ5MTE5NjA3LCJuYmYiOjE3NDkwOTA4MDcsImlhdCI6MTc0OTA5MDgwN30.Ql0R9eDpo1zIvvmoXCf7I8ttblkbb7GQmiRmOvRoDTc");
+        _client.DefaultRequestHeaders.TryAddWithoutValidation("Origin", "https://csl.zte.com.cn");
+
+        StringContent stringContent = new StringContent("{\"vmId\":\"47\",\"vmName\":\"ENS47\",\"vmModel\":\"SWITCH\",\"projectName\":\"2025-06-05 10:33:34-project\",\"host\":\"192.168.6.252\",\"port\":\"xxvgei-0/20/1/2\"}", encoding: Encoding.UTF8, "application/json");
+
+        var response = await _client.PostAsync("oprationvm/downloadPacketCaptureFile", stringContent);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsByteArrayAsync();
+ 
+            System.IO.File.WriteAllBytes("C:\\Users\\Administrator\\Desktop\\2.pcap", content);
+        } 
+
     }
 
 }
