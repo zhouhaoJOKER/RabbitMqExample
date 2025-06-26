@@ -2,20 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace ConsoleApp1.Model
+namespace FM.UltraLab.Api.Model.CampusModel
 {
-    public class WsMesModel : BaseMesModel
-    {
-        public bool status { get; set; }
-    }
-
-    public class BaseMesModel
-    {
-        public int type { get; set; }
-    }
-
     /// <summary>
     /// 
     /// </summary> 
@@ -33,6 +22,5 @@ namespace ConsoleApp1.Model
         public string expParentId { get; set; }
         public string expId { get; set; }
         public string expName { get; set; }
-    } 
-
+    }
 }

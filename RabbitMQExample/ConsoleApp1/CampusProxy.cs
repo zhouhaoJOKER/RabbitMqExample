@@ -4,8 +4,10 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using WebSocketSharp;
 
 namespace ConsoleApp1
@@ -201,6 +203,40 @@ namespace ConsoleApp1
                 this._accssToken = res.Data.Data.AccessToken;
             }
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cmdLine"></param>
+        /// <returns></returns>
+        public CampusCmdParam? DecodeCmdParam(string cmdLine)
+        {
+            string secret = HttpUtility.UrlDecode(cmdLine);
+            // 3. base64解码
+            var json = Encoding.UTF8.GetString(Convert.FromBase64String(secret));
+
+            // 4. 反序列化为 CampusCmdParam
+            return JsonConvert.DeserializeObject<CampusCmdParam>(json);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static string CreateWebUrl()
+        {
+            CampusCmdParam campusCmdParam = new CampusCmdParam()
+            {
+                token = "a8ae84fd-bd28-405c-9dcc-d93be4dda3f8",
+                expId = "1935148883028127746"
+            };
+            string str = JsonConvert.SerializeObject(campusCmdParam);
+            var data = Encoding.UTF8.GetBytes(str);
+            var byets = Convert.ToBase64String(data);
+            var s = HttpUtility.UrlEncode(byets);
+
+            return $"MNOS://{s}";
         }
 
         public void Dispose()

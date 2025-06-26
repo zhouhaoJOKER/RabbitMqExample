@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp1.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace ConsoleApp1
     /// 
     /// </summary>
     public interface ICampusProxy : IDisposable
-    {
+    { 
+        CampusCmdParam? DecodeCmdParam(string cmdLine);
         void EndTask();
         void HeartBeat();
         void LineUp();

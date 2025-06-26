@@ -5,6 +5,7 @@ namespace ConsoleApp1
     {
         static async Task Main(string[] args)
         {
+            string s = CampusProxy.CreateWebUrl();
             string userName = "zhouhao";
             string password = "123456";
 
@@ -42,7 +43,6 @@ namespace ConsoleApp1
                 proxy.EndTask();
                 await Task.Delay(5000);
             }
-
 
             await Task.Delay(3000);
             proxy.Dispose();
