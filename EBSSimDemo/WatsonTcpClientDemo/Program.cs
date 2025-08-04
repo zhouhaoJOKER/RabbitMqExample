@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Contracts;
+using Newtonsoft.Json;
 using System.Text;
 using System.Text.Json.Serialization;
 using WatsonTcp;
@@ -54,8 +55,8 @@ namespace WatsonTcpClientDemo
             if (_client.Connected)
             {
                 Dictionary<string, object> metaData = new Dictionary<string, object>();
-                metaData.Add("OptType", "LoadCir");
-                string payload = @"{""CirId"":""1"",""DebugLevel"":""1"",""Cmds"":""[\""DESC\"",\""V1 pt1 0 SINE(0 0.502 1022)\"",\""R1 pt1 0 90G\"",\"".TRAN 1E-06S 0.0500000007450581S\"",\"".control\"",\""run\"",\"".endc\"",\"".end\""]"",""Speaker"":""{}"",""MonitorDevices"":""{\""示波器1\"":{\""CH1节点\"":\""pt1,0\"",\""CH2节点\"":\"",\"",\""DeviceType\"":\""示波器\""}}"",""StepTime"":""1E-06"",""CirMode"":""0"",""Tps"":""[\""pt1\"",\""0\""]""}";
+                metaData.Add("OptType", NgspiceOptEnum.LoadCir.ToString());
+                string payload = @"{""CirId"":""5"",""DebugLevel"":""1"",""Cmds"":""[\""DESC\"",\""Vcc1 pt26 0 7.86\"",\""R17 pt17 0 90G\"",\""R3 pt17 pt26 510\"",\""R4 0 pt17 120\"",\"".TRAN 1E-06S 0.0500000007450581S\"",\"".control\"",\""run\"",\"".endc\"",\"".end\""]"",""Speaker"":""{}"",""MonitorDevices"":""{}"",""StepTime"":""1E-06"",""CirMode"":""0"",""Tps"":""[\""pt17\"",\""0\""]""}";
 
                 try
                 {
@@ -86,12 +87,35 @@ namespace WatsonTcpClientDemo
                 return;
             }
 
-            
+
             string data = "";
+
+            if (_client.Connected)
+            {
+                Dictionary<string, object> metaData = new Dictionary<string, object>();
+                metaData.Add("OptType", NgspiceOptEnum.LoadCir.ToString());
+                string payload = @"{""CirId"":""1"",""DebugLevel"":""1"",""Cmds"":""[\""DESC\"",\""V1 pt1 0 SINE(0 0.502 1022)\"",\""R1 pt1 0 90G\"",\"".TRAN 1E-06S 0.0500000007450581S\"",\"".control\"",\""run\"",\"".endc\"",\"".end\""]"",""Speaker"":""{}"",""MonitorDevices"":""{\""示波器1\"":{\""CH1节点\"":\""pt1,0\"",\""CH2节点\"":\"",\"",\""DeviceType\"":\""示波器\""}}"",""StepTime"":""1E-06"",""CirMode"":""0"",""Tps"":""[\""pt1\"",\""0\""]""}";
+
+                try
+                {
+                    var res = await _client.SendAndWaitAsync(10 * 1000, payload, metaData);
+                    data = Encoding.UTF8.GetString(res.Data);
+                    Console.WriteLine($"MockSceneOne:\n{data}");
+                }
+                catch (TimeoutException ex)
+                {
+                    Console.WriteLine($"操作超时：LoadCir");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"其他错误：{ex.StackTrace}{ex.Message}");
+                }
+            }
+
             try
             {
                 Dictionary<string, object> metaData = new Dictionary<string, object>();
-                metaData.Add("OptType", "SBQSetting");
+                metaData.Add("OptType", NgspiceOptEnum.SBQSetting.ToString());
 
                 string payload = @"{""水平展宽"":""0.002"",""触发通道"":""0"",""触发电平"":""0.000"",""触发类型"":""0"",""水平位置"":""0.000000"",""CH1显示模式"":""0"",""CH2显示模式"":""0"",""Name"":""示波器1""}";
                 var res = await _client.SendAndWaitAsync(10 * 1000, payload, metaData);
@@ -114,7 +138,7 @@ namespace WatsonTcpClientDemo
 
             MessageResp? resp = JsonConvert.DeserializeObject<MessageResp>(data);
 
-            if (resp == null || !resp.bSucess) 
+            if (resp == null || !resp.bSucess)
             {
                 return;
             }
@@ -143,7 +167,7 @@ namespace WatsonTcpClientDemo
             try
             {
                 Dictionary<string, object> metaData = new Dictionary<string, object>();
-                metaData.Add("OptType", "GetSBQData");
+                metaData.Add("OptType", NgspiceOptEnum.GetSBQData.ToString());
 
                 string payload = @"{""水平展宽"":""0.002"",""触发通道"":""0"",""触发电平"":""0.000"",""触发类型"":""0"",""水平位置"":""0.000000"",""CH1显示模式"":""0"",""CH2显示模式"":""0"",""Name"":""示波器1"",""起始时间"":""0.0500000007450581""}";
                 var res = await _client.SendAndWaitAsync(10 * 1000, payload, metaData);
@@ -170,7 +194,7 @@ namespace WatsonTcpClientDemo
             Dictionary<string, object> metaData = new Dictionary<string, object>();
             metaData.Add("OptType", "HeartTopoGragh");
             string payload = "";
-            var res = await _client.SendAsync(payload, metaData); 
+            var res = await _client.SendAsync(payload, metaData);
         }
     }
 }
