@@ -228,8 +228,8 @@ namespace ConsoleApp1
         {
             CampusCmdParam campusCmdParam = new CampusCmdParam()
             {
-                token = "a8ae84fd-bd28-405c-9dcc-d93be4dda3f8",
-                expId = "1935148883028127746"
+                token = "df412477-9a52-44e5-aee0-e959c1113645",
+                expId = "1940318245326336002"
             };
             string str = JsonConvert.SerializeObject(campusCmdParam);
             var data = Encoding.UTF8.GetBytes(str);
